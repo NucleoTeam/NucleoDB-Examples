@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'application'
+}
+
+
+group = 'com.nucleodb'
+version = 'test'
+
+mainClassName = 'com.nucleodb.test.AnimeTest'
+
+repositories {
+    mavenCentral()
+    maven { url "https://nexus.synload.com/repository/maven-repo-releases/" }
+}
+
+dependencies {
+    implementation 'com.nucleodb:library:1.12.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

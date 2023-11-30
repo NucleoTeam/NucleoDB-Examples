@@ -7,8 +7,10 @@ plugins {
 }
 
 
-group = 'com.nucleocore'
+group = 'com.nucleodb'
 version = 'test'
+
+mainClassName = 'com.nucleodb.test.SpringRepoTest'
 
 repositories {
     mavenCentral()
