@@ -1,6 +1,6 @@
 package com.nucleodb.test.domain.tables;
 
-import com.nucleodb.library.database.tables.annotation.Index;
+import com.nucleodb.library.database.index.annotation.Index;
 import com.nucleodb.library.database.tables.annotation.Table;
 import com.nucleodb.test.domain.definitions.UserDE;
 import com.nucleodb.test.domain.tables.extra.UserNested;

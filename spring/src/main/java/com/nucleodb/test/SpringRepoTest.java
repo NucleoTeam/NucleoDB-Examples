@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableNDBRepositories(
-    dbType = NucleoDB.DBType.ALL,
+    dbType = NucleoDB.DBType.NO_LOCAL,
     kafkaServers = "127.0.0.1:19092,127.0.0.1:29092,127.0.0.1:39092",
     scanPackages = {
         "com.nucleodb.test.domain"

@@ -30,9 +30,9 @@ public class AnimeController{
   public List<AnimeDE> test(){
     return animeRepository.findAll();
   }
-  @GetMapping("/save")
-  public AnimeDE saveTest(){
-    return animeRepository.save(new AnimeDE(new Anime("woot test", 2.00f)));
+  @GetMapping("/save/{name}")
+  public AnimeDE saveTest(@PathVariable String name){
+    return animeRepository.save(new AnimeDE(new Anime(name, 2.00f)));
   }
 
   @GetMapping("/id")
@@ -40,8 +40,23 @@ public class AnimeController{
     return animeRepository.findById("47cc9cc8-9fd4-4e54-97da-071c5a75fce2");
   }
 
+  @GetMapping("/query/{name}")
+  public Anime queryTest(@PathVariable String name){
+    return animeRepository.findByName(name);
+  }
+
+  @GetMapping("/delete/{name}")
+  public void deleteQuery(@PathVariable String name){
+    animeRepository.deleteByName(name);
+  }
+
+  @GetMapping("/query/{name}/{key}")
+  public Set<AnimeDE> queryTest(@PathVariable String name, @PathVariable String key){
+    return animeRepository.findByNameAndKey(name, key);
+  }
+
   @GetMapping("/query")
-  public Set<AnimeDE> queryTest(){
+  public Anime queryTest(){
     return animeRepository.findByName("test");
   }
 

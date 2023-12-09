@@ -1,13 +1,14 @@
 package com.nucleodb.test.domain.tables.extra;
 
-import com.nucleodb.library.database.tables.annotation.Index;
+import com.nucleodb.library.database.index.TrieIndex;
+import com.nucleodb.library.database.index.annotation.Index;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class VoiceActor implements Serializable{
   private static final long serialVersionUID = 1;
-  @Index()
+  @Index(type = TrieIndex.class)
   String name;
   String character;
 

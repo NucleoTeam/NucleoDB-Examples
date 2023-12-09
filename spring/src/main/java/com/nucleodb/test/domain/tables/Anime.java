@@ -1,7 +1,8 @@
 package com.nucleodb.test.domain.tables;
 
 
-import com.nucleodb.library.database.tables.annotation.Index;
+import com.nucleodb.library.database.index.TrieIndex;
+import com.nucleodb.library.database.index.annotation.Index;
 import com.nucleodb.library.database.tables.annotation.Table;
 import com.nucleodb.test.domain.definitions.AnimeDE;
 import com.nucleodb.test.domain.tables.extra.VoiceActor;
@@ -12,10 +13,12 @@ import java.util.List;
 @Table(tableName = "anime", dataEntryClass = AnimeDE.class)
 public class Anime implements Serializable{
   private static final long serialVersionUID = 1;
-  @Index()
+  @Index(type = TrieIndex.class)
   String name;
   List<String> tags = new ArrayList<>();
   List<VoiceActor> actors;
+
+  @Index
   String image;
 
   String owner;
