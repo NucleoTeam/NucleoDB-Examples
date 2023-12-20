@@ -10,7 +10,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableNDBRepositories(
     dbType = NucleoDB.DBType.NO_LOCAL,
-    kafkaServers = "127.0.0.1:19092,127.0.0.1:29092,127.0.0.1:39092",
+    /*
+    Feature: Read To Time, will read only changes equal to or before the date set.
+     */
+    //readToTime = "2023-12-17T00:42:32.906539Z",
     scanPackages = {
         "com.nucleodb.test.domain"
     },
