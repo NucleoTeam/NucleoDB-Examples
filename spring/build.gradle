@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.nucleodb:spring:3.3.11'
+    implementation 'com.nucleodb:spring:3.3.16'
     implementation('org.springframework.boot:spring-boot-starter-web')
 
 }

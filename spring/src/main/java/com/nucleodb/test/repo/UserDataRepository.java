@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface UserDataRepository extends NDBDataRepository<UserDE, String>{
   void deleteByTableName();
   void getDistinctBy();
-  Optional<UserDE> getByName(String name);
+  UserDE getByName(String name);
   void findByKeyNot(String h, String g);
 }

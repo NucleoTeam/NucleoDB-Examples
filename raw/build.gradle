@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.nucleodb:library:1.12.2'
+    implementation 'com.nucleodb:library:1.13.19'
 }
 
 tasks.named('test') {

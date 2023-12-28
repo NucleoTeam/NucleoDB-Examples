@@ -1,5 +1,8 @@
 package com.nucleodb.test;
 
+import com.nucleodb.library.database.utils.Serializer;
+import com.nucleodb.spring.events.DataEntryCreatedEvent;
+import com.nucleodb.spring.events.DataEntryDeletedEvent;
 import com.nucleodb.test.domain.tables.Anime;
 import com.nucleodb.test.domain.definitions.AnimeDE;
 import com.nucleodb.test.domain.tables.User;
@@ -9,8 +12,11 @@ import com.nucleodb.test.repo.AnimeDataRepository;
 import com.nucleodb.test.repo.UserDataRepository;
 import com.nucleodb.test.repo.WatchingConnectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,9 +36,28 @@ public class AnimeController{
   public List<AnimeDE> test(){
     return animeRepository.findAll();
   }
+
   @GetMapping("/save/{name}")
   public AnimeDE saveTest(@PathVariable String name){
     return animeRepository.save(new AnimeDE(new Anime(name, 2.00f)));
+  }
+
+  @GetMapping("/user/delete/{name}")
+  public void deleteUserTest(@PathVariable String name){
+    UserDE byName = userRepository.getByName(name);
+    if(byName!=null){
+      userRepository.delete(byName);
+    }
+  }
+
+  @GetMapping("/user/get/{name}")
+  public UserDE getUserTest(@PathVariable String name){
+    return userRepository.getByName(name);
+  }
+
+  @PostMapping("/user/save")
+  public User saveUserTest(@RequestBody User user){
+    return userRepository.save(new UserDE(user)).getData();
   }
 
   @GetMapping("/id")
@@ -95,6 +120,22 @@ public class AnimeController{
       return watchingConnectionRepository.getByTo(byId.get());
     }
     return null;
+  }
+
+  @EventListener
+  public void animeCreatedEvent(DataEntryCreatedEvent<AnimeDE> animeCreated){
+    Serializer.log("Anime created "+animeCreated.getDataEntry().getData().getName());
+  }
+
+  @EventListener
+  public void userCreatedEvent(DataEntryCreatedEvent<UserDE> userCreated){
+    Serializer.log("User created "+userCreated.getDataEntry().getData().getName());
+    userRepository.delete(userCreated.getDataEntry());
+  }
+
+  @EventListener
+  public void userDeletedEvent(DataEntryDeletedEvent<UserDE> userDeleted){
+    Serializer.log("User deleted "+userDeleted.getDataEntry().getData().getName());
   }
 
   @GetMapping("/watch/to/{id}/from")

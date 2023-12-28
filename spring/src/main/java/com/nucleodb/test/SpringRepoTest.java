@@ -23,8 +23,4 @@ public class SpringRepoTest{
     public static void main(String[] args){
         SpringApplication.run(SpringRepoTest.class);
     }
-    @Bean
-    public NDBConfiguration createNDBConfig(){
-        return new NDBConfiguration("com.nucleocore.test.spring.repo");
-    }
 }
